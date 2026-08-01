@@ -50,6 +50,36 @@ Setup, Doctor, Analysis, and Repair remain separate. Doctor validates the enviro
 
 The package pins SwiftSyntax `603.0.2`. Apple Foundation Models repair requires a supported Mac, a supported macOS release, Apple Intelligence enabled by the system, and ready local model assets. Deterministic Analysis and Repair remain available when those conditions are not met.
 
+## Install from GitHub Releases
+
+The release binary requires Apple Silicon (`arm64`) and macOS 13 or later. It is signed with a Developer ID Application certificate and notarized by Apple.
+
+Open the [latest release](https://github.com/Jiaxu-Li/SwiftDelta/releases/latest), or go directly to [SwiftDelta 1.0.0](https://github.com/Jiaxu-Li/SwiftDelta/releases/tag/v1.0.0), and download both files:
+
+- `SwiftDelta-1.0.0-macos-arm64.zip`
+- `SwiftDelta-1.0.0-macos-arm64.sha256`
+
+Verify, extract, install, and launch the executable from Terminal:
+
+```sh
+cd ~/Downloads
+shasum -a 256 -c SwiftDelta-1.0.0-macos-arm64.sha256
+unzip SwiftDelta-1.0.0-macos-arm64.zip
+sudo mkdir -p /usr/local/bin
+sudo install -m 0755 SwiftDelta-1.0.0-macos-arm64/swiftdelta /usr/local/bin/swiftdelta
+swiftdelta
+```
+
+To download the same assets from Terminal, run these commands before the verification step:
+
+```sh
+cd ~/Downloads
+curl -fLO https://github.com/Jiaxu-Li/SwiftDelta/releases/download/v1.0.0/SwiftDelta-1.0.0-macos-arm64.zip
+curl -fLO https://github.com/Jiaxu-Li/SwiftDelta/releases/download/v1.0.0/SwiftDelta-1.0.0-macos-arm64.sha256
+```
+
+GitHub's automatically generated **Source code (zip)** and **Source code (tar.gz)** archives contain the repository source, not the signed release executable. Use the manually uploaded `SwiftDelta-1.0.0-macos-arm64.zip` when installing the official binary. SwiftDelta does not currently provide a Homebrew formula, universal or Intel binary, package installer, or automatic installer.
+
 ## Build from source
 
 Clone or unpack the source, then build the release executable with Swift Package Manager:
