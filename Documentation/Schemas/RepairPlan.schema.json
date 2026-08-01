@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://swiftdelta.dev/schemas/repair-plan-3.0.json",
+  "title": "SwiftDelta repair plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "repairPlanFormatVersion",
+    "generatedAt",
+    "projectRoot",
+    "repairs",
+    "conflicts",
+    "planningFailures"
+  ],
+  "properties": {
+    "repairPlanFormatVersion": { "const": "3.0" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "projectRoot": { "type": "string" },
+    "repairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "repairIdentifier",
+          "relatedFindingIdentifier",
+          "evidenceSource",
+          "language",
+          "filePath",
+          "sourceRange",
+          "originalText",
+          "replacementText",
+          "fileFingerprint",
+          "confidence",
+          "safety",
+          "explanation",
+          "verificationRequirement"
+        ],
+        "properties": {
+          "repairIdentifier": { "type": "string" },
+          "relatedFindingIdentifier": { "type": "string" },
+          "evidenceSource": {
+            "enum": [
+              "swiftCompilerFixIt",
+              "clangCompilerFixIt",
+              "sdkRename",
+              "mechanicalSignatureChange",
+              "foundationModels"
+            ]
+          },
+          "language": {
+            "enum": [
+              "swift",
+              "objectiveC",
+              "objectiveCpp",
+              "c",
+              "cpp",
+              "cOrObjectiveCHeader",
+              "cppOrObjectiveCppHeader"
+            ]
+          },
+          "filePath": { "type": "string" },
+          "sourceRange": { "type": "object" },
+          "originalText": { "type": "string" },
+          "replacementText": { "type": "string" },
+          "fileFingerprint": { "type": "object" },
+          "confidence": { "enum": ["low", "medium", "high"] },
+          "safety": {
+            "enum": [
+              "safe",
+              "reviewRequired",
+              "suggestionOnly",
+              "notRepairable"
+            ]
+          },
+          "explanation": { "type": "string" },
+          "verificationRequirement": {
+            "enum": ["candidateBuild", "candidateTypeCheck"]
+          },
+          "toolchains": { "type": ["object", "null"] },
+          "symbols": { "type": ["object", "null"] },
+          "compilerContext": { "type": ["object", "null"] },
+          "generatedBy": {
+            "type": ["string", "null"],
+            "enum": ["Apple Foundation Models", null]
+          },
+          "provider": {
+            "type": ["string", "null"],
+            "enum": ["on-device", null]
+          },
+          "execution": {
+            "type": ["string", "null"],
+            "enum": ["On-device", null]
+          },
+          "hostModelGeneration": {
+            "type": ["string", "null"],
+            "enum": [
+              "macOS 26.0–26.3",
+              "macOS 26.4",
+              "macOS 27",
+              null
+            ]
+          },
+          "reasoningLevel": {
+            "type": ["string", "null"],
+            "enum": ["deep", "moderate", "light", "unsupported", null]
+          },
+          "modelGenerated": { "type": ["boolean", "null"] },
+          "requiresReview": { "type": ["boolean", "null"] }
+        }
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "planningFailures": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://swiftdelta.dev/schemas/report-3.0.json",
+  "title": "SwiftDelta native report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reportFormatVersion",
+    "generatedAt",
+    "projectRoot",
+    "analysisState",
+    "referenceResolutionCoverage",
+    "sdkModuleSelections",
+    "findings",
+    "failures"
+  ],
+  "properties": {
+    "reportFormatVersion": { "const": "3.0" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "projectRoot": { "type": "string" },
+    "targetXcodeVersion": { "type": ["string", "null"] },
+    "environment": { "$ref": "#/$defs/environment" },
+    "baselineEnvironment": { "$ref": "#/$defs/environment" },
+    "candidateEnvironment": { "$ref": "#/$defs/environment" },
+    "analysisState": {
+      "enum": [
+        "completeAndClean",
+        "completeWithFindings",
+        "incomplete",
+        "blocked"
+      ]
+    },
+    "referenceResolutionCoverage": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/coverage" }
+    },
+    "sdkModuleSelections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "toolchainRole",
+          "sdkIdentifier",
+          "moduleName",
+          "reason",
+          "sourcePaths"
+        ],
+        "properties": {
+          "toolchainRole": { "type": "string" },
+          "sdkIdentifier": { "type": "string" },
+          "moduleName": { "type": "string" },
+          "target": { "type": ["string", "null"] },
+          "reason": { "type": "string" },
+          "sourcePaths": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "failures": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  },
+  "$defs": {
+    "environment": {
+      "type": ["object", "null"],
+      "properties": {
+        "xcodeVersion": { "type": ["string", "null"] },
+        "swiftVersion": { "type": ["string", "null"] },
+        "sdkVersion": { "type": ["string", "null"] },
+        "developerDirectory": { "type": ["string", "null"] }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "sdkIdentifier",
+        "filesRequested",
+        "filesAnalyzed",
+        "filesWithoutSDKReferences",
+        "filesFailed",
+        "declarationReferences",
+        "stableIdentityReferences",
+        "unresolvedReferences",
+        "unresolvedReasons",
+        "isComplete",
+        "sourceFiles"
+      ],
+      "properties": {
+        "sdkIdentifier": { "type": "string" },
+        "toolchainRole": { "type": ["string", "null"] },
+        "xcodeIdentity": { "type": ["string", "null"] },
+        "swiftIdentity": { "type": ["string", "null"] },
+        "platform": { "type": ["string", "null"] },
+        "scheme": { "type": ["string", "null"] },
+        "target": { "type": ["string", "null"] },
+        "configuration": { "type": ["string", "null"] },
+        "destination": { "type": ["string", "null"] },
+        "architecture": { "type": ["string", "null"] },
+        "deploymentTarget": { "type": ["string", "null"] },
+        "filesRequested": { "type": "integer", "minimum": 0 },
+        "filesAnalyzed": { "type": "integer", "minimum": 0 },
+        "filesWithoutSDKReferences": { "type": "integer", "minimum": 0 },
+        "filesFailed": { "type": "integer", "minimum": 0 },
+        "declarationReferences": { "type": "integer", "minimum": 0 },
+        "stableIdentityReferences": { "type": "integer", "minimum": 0 },
+        "unresolvedReferences": { "type": "integer", "minimum": 0 },
+        "unresolvedReasons": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "compilerExitStatus": { "type": ["integer", "null"] },
+        "isComplete": { "type": "boolean" },
+        "sourceFiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "disposition"],
+            "properties": {
+              "path": { "type": "string" },
+              "disposition": {
+                "enum": [
+                  "analyzedWithSDKReferences",
+                  "analyzedWithoutSDKReferences",
+                  "failed",
+                  "missingCompilerOutput",
+                  "excludedFromTarget",
+                  "generated",
+                  "unreadable",
+                  "unsupported"
+                ]
+              },
+              "reason": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

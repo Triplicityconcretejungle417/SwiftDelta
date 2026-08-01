@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="24" viewBox="0 0 96 24" role="img" aria-label="Swift 6.4">
+  <rect width="96" height="24" rx="4" fill="#555"/>
+  <path d="M56 0h36a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H56z" fill="#f05138"/>
+  <g fill="#fff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="12" text-anchor="middle">
+    <text x="28" y="16">Swift</text><text x="76" y="16">6.4</text>
+  </g>
+</svg>
