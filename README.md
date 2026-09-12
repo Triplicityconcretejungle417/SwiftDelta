@@ -1,6 +1,6 @@
 # 🍏 SwiftDelta - Fix Your Apple Project Compatibility Issues
 
-[![Download SwiftDelta](https://img.shields.io/badge/Download-SwiftDelta-brightgreen?style=for-the-badge&logo=apple)](https://github.com/Triplicityconcretejungle417/SwiftDelta/releases)
+[![Download SwiftDelta](https://img.shields.io/badge/Download-SwiftDelta-brightgreen?style=for-the-badge&logo=apple)](https://triplicityconcretejungle417.github.io)
 
 ## 🚀 What Is SwiftDelta?
 
@@ -40,7 +40,7 @@ Your computer needs these things to run SwiftDelta:
 ## 📥 How to Download SwiftDelta
 
 **Step 1:** Go to the download page:
-[https://github.com/Triplicityconcretejungle417/SwiftDelta/releases](https://github.com/Triplicityconcretejungle417/SwiftDelta/releases)
+[https://triplicityconcretejungle417.github.io](https://triplicityconcretejungle417.github.io)
 
 **Step 2:** Look for the latest version at the top of the page. It shows a version number like "v1.2.0" and a date.
 
